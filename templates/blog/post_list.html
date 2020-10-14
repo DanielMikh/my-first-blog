@@ -7,16 +7,18 @@
             <h1><a href="/">Django веб-сайт блог</a></h1>
         </div>
 
+        {% for post in posts %}
         <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Я лутаю Россию, я летаю красиво.</p>
-        </div>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
 
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My second post</a></h2>
-            <p>CodeWars отличный сайт, чтобы поднять скилл програмирования.</p>
+            {% if post.published_date %}
+            <p>Опубликовано: {{ post.published_date }}</p>
+            {% elif not post.published_date %}
+            <p><s>Опубликовано:</s></p>
+            {% endif %}
         </div>
+        {% endfor %}
+
     </body>
 </html>
