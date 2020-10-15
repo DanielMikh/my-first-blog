@@ -1,24 +1,13 @@
-<html>
-    <head>
-        <title>Django Blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Django веб-сайт блог</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        {% for post in posts %}
-        <div>
-            <h1><a href="">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr }}</p>
-
-            {% if post.published_date %}
+{% block content %}
+{% for post in posts %}
+    <div class="post">
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+        <div class="date">
             <p>Опубликовано: {{ post.published_date }}</p>
-            {% elif not post.published_date %}
-            <p><s>Опубликовано:</s></p>
-            {% endif %}
         </div>
-        {% endfor %}
-
-    </body>
-</html>
+    </div>
+{% endfor %}
+{% endblock %}
